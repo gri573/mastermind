@@ -1,8 +1,27 @@
 import numpy as np
 print("GUESS THE WORD\n--------------\n\nhow to play:\nAs the title suggests, the goal is to guess a word.\nYou will be given the amount of letters the word contains before your first guess.\nEach letter in your guess will be marked as follows:\nX - The letter is correct and in the correct location.\n* - The letter is correct, but in an incorrect location.\n_ - The letter is incorrect or you have entered it more times than it occurs in the word.\n\nType \"??\" for an in-game help menu\n")
-
-wlist = np.loadtxt("wordlist-english.txt", unpack=True, dtype=str)
-word0 = wlist[np.random.randint(0, len(wlist))]
+listfname = "wordlist-english.txt"
+temp = input("Please specify a word list file name (default: wordlist-english.txt): ")
+if temp != "":
+    listfname = temp
+wlist = np.loadtxt(listfname, unpack=True, usecols=0, dtype=str, delimiter=";")
+windex = np.random.randint(0, len(wlist))
+desc = None
+try:
+    desclist = np.loadtxt(listfname, unpack=True, usecols=1, dtype=str, delimiter=";")
+    desc0 = desclist[windex]
+    last = ""
+    desc = ""
+    for letter in desc0:
+        if letter == "n" and last == "\\":
+            desc += "\n"
+        else:
+            if letter != "\\":
+                desc += letter
+        last = letter
+except:
+    True
+word0 = wlist[windex]
 word0 = word0.upper()
 print("The current word contains " + str(len(word0)) + " letters.\n")
 word = []
@@ -100,4 +119,6 @@ while entered != word0:
         print(printstring)
         tries += 1
 if tries >= 0:
-    print(word0 + " found in " + str(tries) + " tries")
+    print(word0 + " found in " + str(tries) + " tries\n")
+if desc != None:
+    print("Description:\n" + desc)

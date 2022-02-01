@@ -1,0 +1,42 @@
+Experiment;Untersuchung der Natur in einer definierten, wiederholbaren Art, zur Prüfung eines Modells
+Modell;Möglichst einfache hinreichend umfassende Beschreibung der Natur
+Einheit;Willkürlich festgelegte Skala für physikalische Größen
+Koordinatensystem;Beschreibung von Punkten im Raum durch Tupel
+Bahnkurve;Menge der Positionen eines Objektes im Raum in einem Zeitintervall
+Kartesische Koordinaten;Raumachsen mit fester Richtung
+Zylinderkoordinaten;Koordinaten der Form (r, phi, z)\nr ist der horizontale Radius, phi der Winkel in der Bodenfläche und z die Höhe
+Kugelkoordinaten;Koordinaten der Form (r, phi, theta), auf einer Kugeloberfläche mit Radius r
+Vektor;Positions- oder Richtungsangabe in einem Koordinatensystem
+Bezugssystem;für ein Experiment oder eine Berechnung benutztes Koordinatensystem (mehrere möglich)
+Geschwindigkeit;Ableitung des Ortes nach der Zeit\nhäufig Variablenname v\nEinheit: m/s
+Beschleunigung;Ableitung der Geschwindigkeit nach der Zeit\nhäufig Variablenname a\nEinheit:m/s²
+Kraft;Wechselwirkung zwischen Objekten\nMasse mal Beschleunigung\nhäufig Variablenname F\n-grad V mit V als Potential\n-k * x für hookesche Federn mit k als Federkonstante und x als Auslenkung\nEinheit: kg m/s²
+Inertialsystem;Bezugssystem ohne Beschleunigung, also ohne Scheinkräfte
+Orthogonalität;Senkrechte Komponenten von Bewegungen lassen sich unabhängig voneinander betrachten
+Freies Teilchen;wird nicht beschleunigt
+Kräftezerlegung;in senkrechte und parallele Anteile zu einer Richtung
+Kraftfeld;Ortsabhängige Kraft\nSpezialfall Zentralkraftfeld: Kraft in Richtung zu einem Punkt abhängig nur von Abstand zu diesem\nSpezialfall konservativ: Arbeit ist Wegunabhängig, rot = 0
+Newtonsche Gesetze;1: keine Kraft => keine Beschleunigung\n2: F = m * a = dp/dt\n3: Kraft = Gegenkraft
+Impuls;Geschwindigkeit mal Masse\nHäufiges Formelzeichen p\nFür freie Teilchen konstant\nbleibt häufig erhalten\nEinheit: kg m/s
+Träge Masse;Masse, die beschleunigt wird
+Schwere Masse;Masse, auf die eine Gravitationskraft wirkt, \”beschleunigende Masse\”
+Reibung;Rückwirkende Kraft zu vielen verschiedenen Kräften\nArten: Haftreibung, newtonsche Reibung, stokessche Reibung\nHäufiges Formelzeichen: F_r
+Haftreibung;Reibung auf Oberfläche ohne Bewegung\nF_r = µ F_n
+Newtonsche Reibung;Reibung bei Bewegung\nF_r ∝v
+Stokessche Reibung;Reibung bei Bewegung\nF_r ∝v²
+Arbeit;Kraft integriert über Weg\nPotentialdifferenz zwischen Start- und Endpunkt\nLeistung mal Zeit\nHäufiges Formelzeichen W\nEinheit: kg m²/s² = J
+Gradient;Richtung der größten Steigung\nVektor der Ableitungen eines Skalarfeldes in jeweilige Raumrichtungen
+Rotation;Mechanisch: Drehung\nin Vektorfeldern: grad × v
+Divergenz;gibt Quellen und Senken von Vektorfeldern an\nBerechnet durch Summe der Ableitungen der Komponenten in ihre Richtung
+Laplace-Operator;Divergenz des Gradienten eines Skalarfeldes
+Energie;gespeicherte Arbeit
+Energieerhaltungssatz;Die Gesamtenergie eines Systems ist konstant\nAbkürzung: EES
+Zentralkraftfeld;Kraftfeld, in dem die Kraft zu einem festen Punkt zeigt und nur abhängig von Abstand zu diesem ist\nKonservativ\nDrehimpuls konstant
+Drehimpuls;Rotatorisches Äquivalent zum Impuls\nL = r × p = I ω mit Trägheitsmoment I\nIntegral des Drehmomentes
+Trägheitsmoment;Rotatorisches Äquivalent zur Masse\nI = ∫r²dM
+Drehmoment;Rotatorisches Äquivalent zur Kraft\nD = r×F = I dω/dt\nAbleitung des Drehimpulses
+Winkelgeschwindigkeit;Rotationsgeschwindigkeit eines Körpers\nIm dreidimensionalen Fall Vektor entlang Rotationsachse
+Gravitationswaage;Experiment zur Messung der Gravitationskonstanten G≈6,7·10^-11 m³/kg s²
+Effektives Potential;Skalarfeld in Zentralkraftfeld:\nSumme aus kinetischer und potentieller Energie bei konstantem Drehimpuls
+Gravitationskraft;Anziehungskraft zwischen Körpern, proportional zur Masse\nGravitationskraft zwischen zwei Objekten: F_g = G·m_1·m_2/R
+Gravitationsfeld;Zentralkraftfeld, durch Gravitation erzeugt\nGravitationsfeld von Hohlkugeln außerhalb der oberfläche wie Gravitationsfeld einer Punktmasse, innerhalb 0\nGravitationsfeld innerhalb von Vollkugeln durch Teil mit r < Abstand des Punktes von Mitte bestimmt
