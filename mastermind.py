@@ -1,9 +1,11 @@
 import numpy as np
+from sys import argv
 print("GUESS THE WORD\n--------------\n\nhow to play:\nAs the title suggests, the goal is to guess a word.\nYou will be given the amount of letters the word contains before your first guess.\nEach letter in your guess will be marked as follows:\nX - The letter is correct and in the correct location.\n* - The letter is correct, but in an incorrect location.\n_ - The letter is incorrect or you have entered it more times than it occurs in the word.\n\nType \"??\" for an in-game help menu\n")
-listfname = "wordlist-english.txt"
-temp = input("Please specify a word list file name (default: wordlist-english.txt): ")
-if temp != "":
-    listfname = temp
+try:
+    listfname = argv[1]
+except:
+    listfname = "wordlist-english.txt"
+    print("no wordlist specified, using default (frequent english)")
 wlist = np.loadtxt(listfname, unpack=True, usecols=0, dtype=str, delimiter=";")
 windex = np.random.randint(0, len(wlist))
 desc = None
