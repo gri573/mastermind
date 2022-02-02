@@ -8,10 +8,11 @@ Zylinderkoordinaten;Koordinaten der Form (r, phi, z)\nr ist der horizontale Radi
 Kugelkoordinaten;Koordinaten der Form (r, phi, theta), auf einer Kugeloberfläche mit Radius r
 Vektor;Positions- oder Richtungsangabe in einem Koordinatensystem
 Bezugssystem;für ein Experiment oder eine Berechnung benutztes Koordinatensystem (mehrere möglich)
-Geschwindigkeit;Ableitung des Ortes nach der Zeit\nhäufig Variablenname v\nEinheit: m/s
-Beschleunigung;Ableitung der Geschwindigkeit nach der Zeit\nhäufig Variablenname a\nEinheit:m/s²
-Kraft;Wechselwirkung zwischen Objekten\nMasse mal Beschleunigung\nhäufig Variablenname F\n-grad V mit V als Potential\n-k * x für hookesche Federn mit k als Federkonstante und x als Auslenkung\nEinheit: kg m/s²
+Geschwindigkeit;Ableitung des Ortes nach der Zeit\nhäufiges Formelzeichen: v\nEinheit: m/s
+Beschleunigung;Ableitung der Geschwindigkeit nach der Zeit\nhäufiges Formelzeichen: a\nEinheit:m/s²
+Kraft;Wechselwirkung zwischen Objekten\nMasse mal Beschleunigung\nhäufiges Formelzeichen: F\n-grad V mit V als Potential\n-k * x für hookesche Federn mit k als Federkonstante und x als Auslenkung\nEinheit: kg m/s²
 Inertialsystem;Bezugssystem ohne Beschleunigung, also ohne Scheinkräfte
+Beschleunigtes Bezugssystem;Bezugssystem, in dem Scheinkräfte (oder Trägheitskräfte) auftreten
 Orthogonalität;Senkrechte Komponenten von Bewegungen lassen sich unabhängig voneinander betrachten
 Freies Teilchen;wird nicht beschleunigt
 Kräftezerlegung;in senkrechte und parallele Anteile zu einer Richtung
@@ -21,22 +22,84 @@ Impuls;Geschwindigkeit mal Masse\nHäufiges Formelzeichen p\nFür freie Teilchen
 Träge Masse;Masse, die beschleunigt wird
 Schwere Masse;Masse, auf die eine Gravitationskraft wirkt, \”beschleunigende Masse\”
 Reibung;Rückwirkende Kraft zu vielen verschiedenen Kräften\nArten: Haftreibung, newtonsche Reibung, stokessche Reibung\nHäufiges Formelzeichen: F_r
-Haftreibung;Reibung auf Oberfläche ohne Bewegung\nF_r = µ F_n
-Newtonsche Reibung;Reibung bei Bewegung\nF_r ∝v
-Stokessche Reibung;Reibung bei Bewegung\nF_r ∝v²
+Haftreibung;Reibung auf Oberfläche ohne Bewegung\nF_r = µ F_n mit Normalkraft F_n
+Haftreibungskoeffizient;Verhältnis von Normalkraft und Haftreibungskraft\nHäufiges Formelzeichen: µ
+Newtonsche Reibung;Reibung bei Bewegung\nF_r∝v²
+Stokessche Reibung;Reibung bei Bewegung\nF_r∝v
 Arbeit;Kraft integriert über Weg\nPotentialdifferenz zwischen Start- und Endpunkt\nLeistung mal Zeit\nHäufiges Formelzeichen W\nEinheit: kg m²/s² = J
 Gradient;Richtung der größten Steigung\nVektor der Ableitungen eines Skalarfeldes in jeweilige Raumrichtungen
 Rotation;Mechanisch: Drehung\nin Vektorfeldern: grad × v
 Divergenz;gibt Quellen und Senken von Vektorfeldern an\nBerechnet durch Summe der Ableitungen der Komponenten in ihre Richtung
 Laplace-Operator;Divergenz des Gradienten eines Skalarfeldes
-Energie;gespeicherte Arbeit
-Energieerhaltungssatz;Die Gesamtenergie eines Systems ist konstant\nAbkürzung: EES
+Energie;gespeicherte Arbeit:\nkinetische Energie: E_kin = m v²/2\nRotationsenergie: E_rot = I ω²/2
+Energieerhaltung;Die Gesamtenergie eines Systems ist konstant\nAbkürzung: EES
 Zentralkraftfeld;Kraftfeld, in dem die Kraft zu einem festen Punkt zeigt und nur abhängig von Abstand zu diesem ist\nKonservativ\nDrehimpuls konstant
 Drehimpuls;Rotatorisches Äquivalent zum Impuls\nL = r × p = I ω mit Trägheitsmoment I\nIntegral des Drehmomentes
-Trägheitsmoment;Rotatorisches Äquivalent zur Masse\nI = ∫r²dM
+Trägheitsmoment;Rotatorisches Äquivalent zur Masse\nI = ∫r²dM\nHäufige Formelzeichen: I, J, Θ
 Drehmoment;Rotatorisches Äquivalent zur Kraft\nD = r×F = I dω/dt\nAbleitung des Drehimpulses
-Winkelgeschwindigkeit;Rotationsgeschwindigkeit eines Körpers\nIm dreidimensionalen Fall Vektor entlang Rotationsachse
+Winkelgeschwindigkeit;Rotation: Rotationsgeschwindigkeit eines Körpers\nIm dreidimensionalen Fall Vektor entlang Rotationsachse\n\nSchwingung:\nω = 2π·f\n\nHäufiges Formelzeichen: ω
 Gravitationswaage;Experiment zur Messung der Gravitationskonstanten G≈6,7·10^-11 m³/kg s²
 Effektives Potential;Skalarfeld in Zentralkraftfeld:\nSumme aus kinetischer und potentieller Energie bei konstantem Drehimpuls
 Gravitationskraft;Anziehungskraft zwischen Körpern, proportional zur Masse\nGravitationskraft zwischen zwei Objekten: F_g = G·m_1·m_2/R
 Gravitationsfeld;Zentralkraftfeld, durch Gravitation erzeugt\nGravitationsfeld von Hohlkugeln außerhalb der oberfläche wie Gravitationsfeld einer Punktmasse, innerhalb 0\nGravitationsfeld innerhalb von Vollkugeln durch Teil mit r < Abstand des Punktes von Mitte bestimmt
+Zentripetalkraft;Bei Kreisbewegungen durch Beschleunigung richtung Rotationszentrum entstehende Kraft\nHäufiges Formelzeichen: F_z\nF_z = m ω² r = m v²/r
+Zentrifugalkraft;Trägheitskraft, Gegenkraft zur Zentripetalkraft\nHäufiges Formelzeichen: F_z\nF_z = m·ω×(r×ω)
+Corioliskraft;Trägheitskraft, Entsteht durch Änderung des Rotationsradius\nHäufiges Formelzeichen: F_c\nF_c = 2m(v×ω) mit v als Geschwindigkeit im beschleunigten System
+Lichtgeschwindigkeit;Ausbreitungsgeschwindigkeit von Licht\nSchnellste Geschwindigkeit, mit der sich etwas bewegen kann\nHäufiges Formelzeichen: c\nc≈2,997·10^8 m/s
+Lorentztransformation;Mit Konstanz der Lichtgeschwindigkeit verträgliche Koordinatentransformation\nx↦γ(x-vt)\n Dabei ist γ = 1/√(1-v²/c²) der Lorentz-Faktor\nNähert sich bei v << c der Galileitransformation an
+Zeit;Verläuft (bis auf relativistische Effekte linear vorwärts\nHäufiges Formelzeichen: t
+Galileitransformation;Methode für Koordinatentransformation\nx↦x-vt
+Schwerpunkt;Mittelpunkt von Körpern bezogen auf das Gewicht\nRotationszentrum, wenn keine äußeren Kräfte wirken\nBerechnet durch SP = 1/m ∫r dm\nSchnittpunkt aller Schwerelinien
+Schwerpunktsystem;Im Schwerpunkt der betrachteten Körper zentriertes Koordinatensystem
+Elastischer Stoß;Kollision von zwei Körpern ohne Energieverlust
+Inelastischer Stoß;Kollision von zwei Körpern mit Energieverlust
+Zentraler Stoß;Frontalkollision zweier Körper, Resultierende Geschwindigkeit ist skalares Vielfaches der Ausgangsgeschwindigkeit
+Impulserhaltung;Die Summe aller Impulse ist konstant
+Drehimpulserhaltung;Die Summe aller Drehimpulse ist konstant
+Erhaltungssätze;in abgeschlossenen Systemen gelten Energieerhaltung, Impulserhaltung und Drehimpulserhaltung\nFolgt mit Lagrange-Funktion aus Symmetriegrößen Homogenität des Raumes, der Zeit und Isotropie des Raumes
+Noethertheorem;Mit jeder Symmetriegröße geht Erhaltungsgröße einher
+Starrer Körper;Körper mit ausgedehnter Masseverteilung\nSechs Freiheitsgrade:\ndrei der Rotation\ndrei der Translation
+Volumenintegral;Dreifachintegral in die drei Raumrichtungen\nVolumenelement dV = dx dy dz = r dr dphi dz = r² dr dphi dtheta
+Kreisel;um freie Achse drehbarer starrer Körper
+Präzession;Änderung der Richtung des Drehimpulses eines Kreisels unter Einwirkung einer Kraf\nDiese Änderung zeigt senkrecht zur angreifenden Kraft\nPräzessionsgeschwindigkeit ω_p = |r × F/L sin θ| mit Winkel θ zwischen Drehimpuls und Kraft
+Satz von Steiner;Trägheitsmoment I_a entlang einer beliebigen Achse durch Punkt im Abstand a von Schwerpunkt I_a = I_0 + a² m\nmit I_0 dem Trägheitsmoment entlang der parallelen Achse durch den Schwerpunkt
+Mathematisches Pendel;an masseloser Schnur der Länge l befestigter Massepunkt in homogenen Kraftfeld mit Kraft F = g·m\nWinkelgeschwindigkeit ω ≈ √(g/l) für kleine Auslenkungswinkel
+Physikalisches Pendel;um feste Achse drehbarer starrer Körper in homogenem Schwerefeld\nWinkelgeschwindigkeit ω ≈ √(g/l_r) mit l_r als reduzierter Pendellänge
+Reduzierte Pendellänge;Hilfsgröße zur beschreibung physikalischer Pendel als mathematische\n l_r = g I/D_φ = l/(m a)\nmit a als Abstand zwischen Schwerpunkt und Aufhängepunkt und
+Masse;Kraft pro Beschleunigung\nHäufiges Formelzeichen: m
+Trägheitstensor;Beschreibt Trägheitsmoment in alle Raumrichtungen\nEigentlich 3×3-Matrix\n im Hauptachsensystem sind Diagonalelemente Trägheitsmomente entlang der jeweiligen Achsen
+Hauptachsensystem;Koordinatensystem mit Basisvektoren entlang der Hauptträgheitsachsen eines starren Körpers
+Hauptträgheitsachse;Richtung von Trägheitsmomentsmaximum und -minimum und die zu beiden senkrechte Richtung
+Trägheitsellipsoid;Ellipsoid aus allen Punkten mit R² I = const
+Eulersche Gleichungen;Bewegungsgleichung von Kreiseln
+Nutation;Eierbewegung der momentanen Drehachse eines nicht sphärischen Kreisels, wenn er sich nicht um eine hauptträgheitsachse, oder um die mittlere Hauptträgheitsachse dreht
+Feder;Objekt, das bei Auslenkung eine Rückstellkraft ausübt\n Hookesche Feder: F_r = k·x mit Auslenkung x, Federkonstante k
+Rückstellkraft;Schwingender Körper\nBeispiel: Hookesche Feder mit Masse – Frequenz f = 2π·√(k/m)
+Federkonstante;Eigenschaft einer Feder:\nRückstellkraft pro Auslenkung\nEinheit: N/m\nHäufiges Formelzeichen: k
+Fourieranalyse;Zerteilung einer Schwingung in ihre Frequenzanteile
+Lissajou-Figur;Überlagerung zueinander senkrechter Schwingungen
+Gedämpfter Oszillator;Oszillator mit Reibung\nBewegungsgleichung: x(t) = exp(-bt) sin(ωt-φ_0) für schwache Dämpfung\nfür starke Dämpfung fällt Sinusterm weg
+Frequenz;Eigenschaft einer Schwingung, Schwingungsperioden pro Zeit\nf = 1/T = 2πω
+Periodendauer;Eigenschaft einer Schwingung, Zeit pro Schwingungsperiode\nT = 1/f = 1/2πω
+Dämpfung;Wie Reibung, nur im Zusammenhang mit Schwingungen\nErgibt sich aus zeitlicher Verringerung der Amplitude\n Dämpfungskoeffizient häufig mit Formelzeichen b, γ
+Erzwungene Schwingung;Schwingung eines Oszillators, die von einer Anregungsschwingung herrührt\nResonanz, wenn Eigenfrequenz des Oszillators ≈ Anregungsfrequenz\nResonanzfrequenz ω_r = √(ω_0² – b²) mit Dämpfung b und ungedämpfter Eigenfrequenz ω_0
+gekoppelte Schwingungen;Der Name ist Programm:\nSchwingungen, die miteinander interagieren\nBeispiel: zwei Massepunkte, durch Feder verbunden und jeweils mit Feder irgendwo fest
+Welle;Schwingung gekoppelter oszillatoren, die sich im Raum ausbreitet\nfür Sinusförmige Wellen: ξ = Asin(ω(t-z/v)+φ)\nmit folgenden Variablen: Amplitude A, Winkelgeschwindigkeit ω, Phasengeschwindigkeit v, Zeit t, Ort z, Phasenversatz φ\nAllgemeine Wellengleichung: Δ ξ = 1/v² ∂²ξ/∂t²
+Amplitude;Maximale Auslenkung einer Schwingung\nHäufiges Formelzeichen: A
+Phasengeschwindigkeit;Geschwindigkeit, mit der sich Phasenflächen einer Welle bewegen\nHäufiges Formelzeichen: v_ph
+Auslenkung;Momentane Entfernung eines Oszillators von seinem Ruhezustand\nHäufiges Formelzeichen: ξ
+Transversalwelle;Welle mit Schwingung senkrecht zur Ausbreitungsrichtung\nBesitzt Eigenschaft der Polarisation\nBeispiele: Licht, Instrumentensaite
+Longitudinalwelle;Welle mit Schwingung parallel zur Ausbreitungsrichtung\nBeispiel: Schallwellen
+Dichte;Masse pro Volumen\nHäufiges Formelzeichen: ρ
+Elastizitätsmodul;Größe, die für die Berechnung der Schallgeschwindigkeit von Longitudinalwellen in Festkörpern benötigt wird\nHäufiges Formelzeichen: E
+Schermodul;Größe, die für die Berechnung der Schallgeschwindigkeit von Transversalwellen in Festkörpern benötigt wird\nHäufiges Formelzeichen: G
+Kompressionsmodul;Größe, die für die Berechnung der Schallgeschwindigkeit von Longitudinalwellen in Flüssigkeiten und Gasen benötigt wird\nHäufiges Formelzeichen: K
+Dispersion;Wellenlängenabhängigkeit der Phasengeschwindigkeit von Wellen
+Kohärenz;Überlagerung von Wellen mit gleicher Frequenz
+Interferenz;Verstärkung oder abschwächung von sich überlagernden Wellen Wellen abhängig von Phasendifferenz\nGleichphasige Wellen: konstruktive Interferenz\nGegenphasige Wellen: destruktive Interferenz
+Dopplereffekt;Frequenzänderung bei bewegtem Sender oder Empfänger\nBewegter Sender: f = f_0·v_ph/(v_ph-U) mit U als Geschwindigkeit des Senders\nBewegter Empfänger: f = f_0·(1 – U/v_ph)
+Schallwellen;Sich wellenförmig ausbreitende Luftdruckänderungen
+Verformung;Veränderung der Form eines Körpers\nElastische Verformung: Anschließende Rückkehr in Ausgangszustand\nPlastische Verformung: dauerhaft
+Poissonzahl;Maß für Querkontraktion von Körpern bei Verformung\nHäufiges Formelzeichen: µ\nFür quadratische Querschnittsfläche mit Dicke d, Länge l: \nµ = -(Δd/d)/(Δl/l)
+Querkontraktion;Verringerung der Querschnitzfläche bei Verformung
+Kompression;Zusammengedrücktwerden
