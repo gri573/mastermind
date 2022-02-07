@@ -34,7 +34,7 @@ Laplace-Operator;Divergenz des Gradienten eines Skalarfeldes
 Energie;gespeicherte Arbeit:\nkinetische Energie: E_kin = m v²/2\nRotationsenergie: E_rot = I ω²/2
 Energieerhaltung;Die Gesamtenergie eines Systems ist konstant\nAbkürzung: EES
 Zentralkraftfeld;Kraftfeld, in dem die Kraft zu einem festen Punkt zeigt und nur abhängig von Abstand zu diesem ist\nKonservativ\nDrehimpuls konstant
-Drehimpuls;Rotatorisches Äquivalent zum Impuls\nL = r × p = I ω mit Trägheitsmoment I\nIntegral des Drehmomentes
+Drehimpuls;Rotatorisches Äquivalent zum Impuls\nHäufiges Formelzeichen: L\nL = r × p = I ω mit Trägheitsmoment I\nIntegral des Drehmomentes
 Trägheitsmoment;Rotatorisches Äquivalent zur Masse\nI = ∫r²dM\nHäufige Formelzeichen: I, J, Θ
 Drehmoment;Rotatorisches Äquivalent zur Kraft\nD = r×F = I dω/dt\nAbleitung des Drehimpulses
 Winkelgeschwindigkeit;Rotation: Rotationsgeschwindigkeit eines Körpers\nIm dreidimensionalen Fall Vektor entlang Rotationsachse\n\nSchwingung:\nω = 2π·f\n\nHäufiges Formelzeichen: ω
