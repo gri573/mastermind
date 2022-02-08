@@ -30,8 +30,8 @@ Arbeit;Kraft integriert über Weg\nPotentialdifferenz zwischen Start- und Endpun
 Gradient;Richtung der größten Steigung\nVektor der Ableitungen eines Skalarfeldes in jeweilige Raumrichtungen
 Rotation;Mechanisch: Drehung\nin Vektorfeldern: grad × v
 Divergenz;gibt Quellen und Senken von Vektorfeldern an\nBerechnet durch Summe der Ableitungen der Komponenten in ihre Richtung
-Laplace-Operator;Divergenz des Gradienten eines Skalarfeldes
-Energie;gespeicherte Arbeit:\nkinetische Energie: E_kin = m v²/2\nRotationsenergie: E_rot = I ω²/2
+Laplace-Operator;Divergenz des Gradienten eines Skalarfeldes\nHäufiges Formelzeichen: Δ
+Energie;gespeicherte Arbeit:\nkinetische Energie: E_kin = m v²/2\nRotationsenergie: E_rot = I ω²/2\ndiverse weitere Energieformen existieren
 Energieerhaltung;Die Gesamtenergie eines Systems ist konstant\nAbkürzung: EES
 Zentralkraftfeld;Kraftfeld, in dem die Kraft zu einem festen Punkt zeigt und nur abhängig von Abstand zu diesem ist\nKonservativ\nDrehimpuls konstant
 Drehimpuls;Rotatorisches Äquivalent zum Impuls\nHäufiges Formelzeichen: L\nL = r × p = I ω mit Trägheitsmoment I\nIntegral des Drehmomentes
@@ -84,7 +84,8 @@ Periodendauer;Eigenschaft einer Schwingung, Zeit pro Schwingungsperiode\nT = 1/f
 Dämpfung;Wie Reibung, nur im Zusammenhang mit Schwingungen\nErgibt sich aus zeitlicher Verringerung der Amplitude\n Dämpfungskoeffizient häufig mit Formelzeichen b, γ
 Erzwungene Schwingung;Schwingung eines Oszillators, die von einer Anregungsschwingung herrührt\nResonanz, wenn Eigenfrequenz des Oszillators ≈ Anregungsfrequenz\nResonanzfrequenz ω_r = √(ω_0² – b²) mit Dämpfung b und ungedämpfter Eigenfrequenz ω_0
 gekoppelte Schwingungen;Der Name ist Programm:\nSchwingungen, die miteinander interagieren\nBeispiel: zwei Massepunkte, durch Feder verbunden und jeweils mit Feder irgendwo fest
-Welle;Schwingung gekoppelter oszillatoren, die sich im Raum ausbreitet\nfür Sinusförmige Wellen: ξ = Asin(ω(t-z/v)+φ)\nmit folgenden Variablen: Amplitude A, Winkelgeschwindigkeit ω, Phasengeschwindigkeit v, Zeit t, Ort z, Phasenversatz φ\nAllgemeine Wellengleichung: Δ ξ = 1/v² ∂²ξ/∂t²
+Welle;Schwingung gekoppelter oszillatoren, die sich im Raum ausbreitet\nfür Sinusförmige Wellen: ξ = A sin(ω(t-z/v)+φ)\nmit folgenden Variablen: Auslenkung ξ, Amplitude A, Winkelgeschwindigkeit ω, Phasengeschwindigkeit v, Zeit t, Ort z, Phasenversatz φ\nAllgemeine Wellengleichung: Δ ξ = 1/v² ∂²ξ/∂t²
+Wellengleichung;Differenzialgleichung zur allgemeinen Beschreibung von Wellen:\nΔ ξ = 1/v² ∂²ξ/∂t²
 Amplitude;Maximale Auslenkung einer Schwingung\nHäufiges Formelzeichen: A
 Phasengeschwindigkeit;Geschwindigkeit, mit der sich Phasenflächen einer Welle bewegen\nHäufiges Formelzeichen: v_ph
 Auslenkung;Momentane Entfernung eines Oszillators von seinem Ruhezustand\nHäufiges Formelzeichen: ξ
@@ -101,5 +102,25 @@ Dopplereffekt;Frequenzänderung bei bewegtem Sender oder Empfänger\nBewegter Se
 Schallwellen;Sich wellenförmig ausbreitende Luftdruckänderungen
 Verformung;Veränderung der Form eines Körpers\nElastische Verformung: Anschließende Rückkehr in Ausgangszustand\nPlastische Verformung: dauerhaft
 Poissonzahl;Maß für Querkontraktion von Körpern bei Verformung\nHäufiges Formelzeichen: µ\nFür quadratische Querschnittsfläche mit Dicke d, Länge l: \nµ = -(Δd/d)/(Δl/l)
-Querkontraktion;Verringerung der Querschnitzfläche bei Verformung
+Querkontraktion;Veränderung der Querschnitsfläche bei Verformung
 Kompression;Zusammengedrücktwerden
+Kundtsches Rohr;Experiment zur Messung der Schallgeschwindigkeit:\nRohr mit leicht beweglichem Staub, der durch eine stehende Welle an dessen Knoten bewegt wird.\nBerechnung der Schallgeschwindigkeit aus Abstand zwischen Knoten und Frequenz.
+Hysterese;Irreversible Deformation eines Körpers unter Krafteinwirkung
+Hookesches Gesetz;Idealisierte Beschreibung von Federn, sehr vielfältige Anwendungen:\nF = -k·x mit Kraft F, Koeffizienten k und Auslenkung x\nAuch auf Drehungen anwendbar
+Fluid;Deformierbarer Körper mit Schermodul G = 0\nZerfließt ohne Rückkehr in Ausgangszustand\nLeistet Tangentialkräften keinen Widerstand\nOberfläche ordnet sich immer senkrecht zur wirkenden Kraft an\nFlüssigkeiten und Gase sind Fluide
+Druck;Kraft pro Fläche\nIn Fluiden auch Schweredruck, Staudruck\nHäufiges Formelzeichen: p
+Schweredruck;Durch auf Flüssigkeitssäule wirkende Gravitationskraft entstehender Druck\np = ρ·g·h in in Tiefe h bei inkompressiblen Fluiden
+Auftrieb;Aufwärts gerichtete, auf in Fluiden befindliche Körper wirkende Kraft.\nGleich der Gravitationskraft, die auf das vom Körper verdrängte Flüssigkeitsvolumen wirken würde (archimedisches Prinzip).
+Schwimmen;Durch Auftrieb an der Oberfläche eines Inkompressiblen Fluids bleiben.\nStabil, wenn Metazentrum oberhalb des Schwerpunktes
+Metazentrum;bei symmetrischen schwimmenden Körpern:\nSchnittpunkt der durch den Schwerpunkt verlaufenden Symmetrieachse mit der durch den Volumenmittelpunkt des verdrängten Fluids verlaufenden Vertikalen.
+Oberflächenspannung;Effekt an Grenzflächen zwischen Fluiden und beliebigen Körpern:\nDifferenz zwischen Anziehungskräften im Fluid und zwischen Fluid und Körper.
+Kapillarkraft;Flüssigkeiten steigen oder sinken in Kapillaren verglichen mit der Höhe der sie umgebenden Flüssigkeit.
+Kontinuitätsgleichung;Masseerhaltung in strömenden Flüssigkeiten\nfür inkompressible Fluide: A·v = const mit Querschnittsfläche A, Fließgeschwindigkeit v\nAlternative, allgemeine Schreibweise: div(ρ·v) = 0
+Bernoulli-Gleichung;Energieerhaltung in strömenden Flüssigkeiten\nFür inkompressible Fluide: p + ρ·v²/2 = p_0 = const\nVariablen: p - lokaler Druck, ρ - Dichte, v – Fließgeschwindigkeit
+Viskosität;Innerer Widerstand von Fluiden gegenüber Verformung\nHäufiges Formelzeichen: ξ
+Hauptsätze der Thermodynamik;Fundamentale Beschreibung des Verhaltens von Körpern unter Berücksichtigung von Wärme\n\n0. Thermische Energie verteilt sich gleichmäßig\n\n1. Energieerhaltung\nΔQ = ΔU-ΔW mit Wärmemenge Q, Innerer Energie U und vom System aufgenommer Arbeit ΔW\nAnwendbar auf Zustandsänderungen von Gasen: Isochor, Isobar, Isotherm, Adiabatisch\n\n2. Es gibt kein Perpetuum Mobile zweiter Art\nDie Carnot-Maschine ist die effizienteste Wärmekraftmaschine\n\n3. Der absolute Nullpunkt ist nicht erreichbar\nDie Temperatur in jedem System ist immer größer als 0 K
+Isotherm;Art von Zustandsänderungen von Stoffen:\nTemperatur bleibt konstant
+Isochor;Art von Zustandsänderungen von Stoffen:\nVolumen bleibt konstant
+Isobar;Art von Zustandsänderungen von Stoffen:\nDruck bleibt konstant
+Adiabatisch;Art von Zustandsänderungen von Stoffen:\nEs findet kein Wärmeaustausch mit der Umgebung statt
+Zustandsgröße;
