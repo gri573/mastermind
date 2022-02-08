@@ -118,9 +118,9 @@ Kapillarkraft;Flüssigkeiten steigen oder sinken in Kapillaren verglichen mit de
 Kontinuitätsgleichung;Masseerhaltung in strömenden Flüssigkeiten\nfür inkompressible Fluide: A·v = const mit Querschnittsfläche A, Fließgeschwindigkeit v\nAlternative, allgemeine Schreibweise: div(ρ·v) = 0
 Bernoulli-Gleichung;Energieerhaltung in strömenden Flüssigkeiten\nFür inkompressible Fluide: p + ρ·v²/2 = p_0 = const\nVariablen: p - lokaler Druck, ρ - Dichte, v – Fließgeschwindigkeit
 Viskosität;Innerer Widerstand von Fluiden gegenüber Verformung\nHäufiges Formelzeichen: ξ
-Hauptsätze der Thermodynamik;Fundamentale Beschreibung des Verhaltens von Körpern unter Berücksichtigung von Wärme\n\n0. Thermische Energie verteilt sich gleichmäßig\n\n1. Energieerhaltung\nΔQ = ΔU-ΔW mit Wärmemenge Q, Innerer Energie U und vom System aufgenommer Arbeit ΔW\nAnwendbar auf Zustandsänderungen von Gasen: Isochor, Isobar, Isotherm, Adiabatisch\n\n2. Es gibt kein Perpetuum Mobile zweiter Art\nDie Carnot-Maschine ist die effizienteste Wärmekraftmaschine\n\n3. Der absolute Nullpunkt ist nicht erreichbar\nDie Temperatur in jedem System ist immer größer als 0 K
+Hauptsätze der Thermodynamik;Fundamentale Beschreibung des Verhaltens von Körpern unter Berücksichtigung von Wärme\n\n0. Thermische Energie verteilt sich gleichmäßig\n\n1. Energieerhaltung\nΔQ = ΔU-ΔW mit Wärmemenge Q, Innerer Energie U und vom System aufgenommer Arbeit ΔW\nAnwendbar auf Zustandsänderungen von Gasen: Isochor, Isobar, Isotherm, Adiabatisch\nFolgerung für ideale Gase: dU = C_v dT\n\n2. Es gibt kein Perpetuum Mobile zweiter Art\nDie Carnot-Maschine ist die effizienteste Wärmekraftmaschine\nMathematische Schreibweise: dS ≥ δQ/T mit Entropie S\n\n3. Der absolute Nullpunkt ist nicht erreichbar\nDie Temperatur in jedem System ist immer größer als 0 K
 Isotherm;Art von Zustandsänderungen von Stoffen:\nTemperatur bleibt konstant
 Isochor;Art von Zustandsänderungen von Stoffen:\nVolumen bleibt konstant
 Isobar;Art von Zustandsänderungen von Stoffen:\nDruck bleibt konstant
 Adiabatisch;Art von Zustandsänderungen von Stoffen:\nEs findet kein Wärmeaustausch mit der Umgebung statt
-Zustandsgröße;
+Zustandsgröße;Aus dem Zustand eines Systems eindeutig bestimmbare Größe\nZustand ist durch seine Zustandsgrößen eindeutig bestimmt
