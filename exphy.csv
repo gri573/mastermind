@@ -57,7 +57,7 @@ Zentraler Stoß;Frontalkollision zweier Körper, Resultierende Geschwindigkeit i
 Impulserhaltung;Die Summe aller Impulse ist konstant
 Drehimpulserhaltung;Die Summe aller Drehimpulse ist konstant
 Erhaltungssätze;in abgeschlossenen Systemen gelten Energieerhaltung, Impulserhaltung und Drehimpulserhaltung\nFolgt mit Lagrange-Funktion aus Symmetriegrößen Homogenität des Raumes, der Zeit und Isotropie des Raumes
-Noethertheorem;Mit jeder Symmetriegröße geht Erhaltungsgröße einher
+Noethertheorem;Mit jeder Symmetriegröße geht eine Erhaltungsgröße einher
 Starrer Körper;Körper mit ausgedehnter Masseverteilung\nSechs Freiheitsgrade:\ndrei der Rotation\ndrei der Translation
 Volumenintegral;Dreifachintegral in die drei Raumrichtungen\nVolumenelement dV = dx dy dz = r dr dphi dz = r² dr dphi dtheta
 Kreisel;um freie Achse drehbarer starrer Körper
