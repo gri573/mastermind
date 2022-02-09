@@ -24,7 +24,7 @@ try:
 except:
     True
 word0 = wlist[windex]
-word0 = word0.upper()
+word0 = word0.lower()
 print("The current word contains " + str(len(word0)) + " letters.\n")
 word = []
 printstring = ""
@@ -39,9 +39,12 @@ wrongletters = ""
 rightletters = ""
 while entered != word0:
     entered = input("")
-    entered = entered.upper()
+    entered = entered.lower()
     if entered == "??":
-        print("In-Game Help Menu\n\nOptions:\nH - get hint\nS - solve\nX - exit\n")
+        hintdesc = ""
+        if desc != None:
+            hintdesc = "D - show description\n"
+        print("In-Game Help Menu\n\nOptions:\nH - get hint\nS - solve\n" + hintdesc + "X - exit\n")
         prompt = input("")
         if prompt.upper() == "H":
             letterremains = []
@@ -69,9 +72,11 @@ while entered != word0:
             print("solution: " + word0)
             tries = -1
             break
+        if prompt.upper() == "D":
+            print(desc)
         print(printstring0)
         entered = input("")
-        entered = entered.upper()
+        entered = entered.lower()
     if len(entered) != len(word):
         print("please enter exactly " + str(len(word)) + " letters")
     else:
@@ -121,6 +126,6 @@ while entered != word0:
         print(printstring)
         tries += 1
 if tries >= 0:
-    print(word0 + " found in " + str(tries) + " tries\n")
+    print(word0.upper() + " found in " + str(tries) + " tries\n")
 if desc != None:
     print("Description:\n" + desc)
