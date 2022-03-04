@@ -5,6 +5,7 @@ unusedletters = input("available letters: ")
 unusedletters = unusedletters.upper()
 requiredletters = input("required letters: ")
 requiredletters = requiredletters.upper()
+print(requiredletters)
 word = input("known letters at correct locations (* for unknown letter): ")
 foundwords = []
 for a in wlist:
@@ -23,6 +24,8 @@ for a in wlist:
                         if letter.upper() == letter0:
                             found0 = True
                             requiredletters0 += letter0
+                    if found0 == False:
+                        found = False
                 else:
                     if letter.upper() != word[k].upper():
                         found = False
