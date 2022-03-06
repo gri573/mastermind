@@ -47,3 +47,4 @@ for a in wlist:
             if found == True:
                 foundwords.append(a.upper())
                 print(a)
+                break
