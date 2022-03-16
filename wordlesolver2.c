@@ -162,7 +162,7 @@ int main(int argc, char* argv[]) {
 						if (!isknown) locnum[wordlist[i][k] - 65]++;
 					}
 					if (!forbidknown) {
-						score *= 2;
+						score = score * 3 / 2;
 						j++;
 					}
 					if (score > maxscore) {
