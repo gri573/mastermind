@@ -111,9 +111,9 @@ int main(int argc, char* argv[]) {
 		printf("Currently known correct letters: %s\n", word);
 		unknown = 0;
 		for (i = 0; i < wlen; i++) if (word[i] == '*') unknown++;
-		printf("Possible Solutions:");
 		if (unknown) {
-			int psc = 30;
+			printf("Possible Solutions:");
+			int psc = 300;
 			int numpossibles = 0;
 			int possiblehist[26] = {0};
 			int possibles[psc];
@@ -134,8 +134,10 @@ int main(int argc, char* argv[]) {
 					int found0 = 1;
 					for (int k = 0; k < 26; k++) if (dictnum[k] < num[k]) found0 = 0;
 					if (found0) {
-						if (numpossibles % 6 == 0) putchar('\n');
-						printf("%s\t", wordlist[i]);
+						if (numpossibles < 30) {
+							if (numpossibles % 6 == 0) putchar('\n');
+							printf("%s\t", wordlist[i]);
+						}
 						possibles[numpossibles] = i;
 						numpossibles++;
 						for (j = 0; j < wlen; j++) if (word[j] == '*') possiblehist[wordlist[i][j] - 65]++;
@@ -200,6 +202,31 @@ int main(int argc, char* argv[]) {
 		if (unknown) printf("Out of tries!\n");
 		else {
 			printf("Found in %d tries!\n", trycount);
+			int tryhist[10] = {0};
+			int ftrycount = 0;
+			FILE* histfile = fopen("tryhist.txt", "r");
+			if (histfile != NULL) {
+				for (int i = 0; i < 10 && fscanf(histfile, "%d ", tryhist + i) == 1; i++);
+				fclose(histfile);
+			}
+			tryhist[trycount]++;
+			histfile = fopen("tryhist.txt", "w");
+			if (histfile != NULL) {
+				for (int i = 0; i < 10; i++) {
+					if (tryhist[i] > ftrycount) ftrycount = tryhist[i];
+					fprintf(histfile, "%d ", tryhist[i]);
+				}
+				fclose(histfile);
+				for (int i = ftrycount; i > 0; i--) {
+					for (int j = 0; j < 10; j++) {
+						switch (i > tryhist[j]) {
+							case 1: putchar(' '); break;
+							case 0: putchar('#'); break;
+						}
+					}
+					putchar('\n');
+				}
+			} else printf("Cannot evaluate try count histogram (missing file)!\n");
 		}
 	}
 	
@@ -220,6 +247,7 @@ int main(int argc, char* argv[]) {
 	if (isnewword) {
 		wfile = fopen("wordlist-english0.txt", "a");
 		fprintf(wfile, "%s\n", word);
+		printf("Added %s to wordlist!\n", word);
 		fclose(wfile);
 	}
 	return 0;
