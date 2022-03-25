@@ -1,9 +1,33 @@
 #include <stdio.h>
+int printword(char word[]) {
+	for (int i = 0; 1; i++) {
+		if (word[i] == 0) return 0;
+		if (word[i] == '*' || (word[i] > 64 && word[i] < 91)) putchar(word[i]);
+		else switch (word[i]) {
+			case 91: printf("Á"); break;
+			case 92: printf("É"); break;
+			case 93: printf("Í"); break;
+			case 94: printf("Ó"); break;
+			case 95: printf("Ú"); break;
+			case 96: printf("Ä"); break;
+			case 97: printf("Ö"); break;
+			case 98: printf("Ü"); break;
+			case 99: printf("ß"); break;
+			case 100: printf("Ő"); break;
+			case 101: printf("Ű"); break;
+			default: {
+				fprintf(stderr, "Bad characters in known letter string: %s\n", word);
+				return -1;
+			}
+		}
+	}
+}
+
 int main(int argc, char* argv[]) {
 	// read word list
 	int wlistlen = 14000;
 	int wlen = -1;
-	if (argc == 2) {
+	if (argc >= 2) {
 		wlen = 0;
 		char c;
 		int i = 0;
@@ -23,7 +47,13 @@ int main(int argc, char* argv[]) {
 		putchar('\n');
 	}
 	char wordlist[wlistlen][wlen + 1];
-	FILE* wfile = fopen("wordlist-english0.txt", "r");
+	FILE* wfile;
+	if (argc <= 2) wfile = fopen("wordlist-english0.txt", "r");
+	else wfile = fopen(argv[2], "r");
+	if (wfile == NULL) {
+		fprintf(stderr, "Wordlist file missing!\n");
+		return -1;
+	}
 	for (int i = 0; i < wlistlen; i++) {
 		char c; 
 		int k;
@@ -33,8 +63,7 @@ int main(int argc, char* argv[]) {
 				break;
 			}
 			if (k < wlen) {
-				if (c > 96 && c < 123) c -= 32;
-				if (c < 65 || c > 90) k = wlen + 1;
+				if (c < 65 || c > 101) k = wlen + 1;
 				wordlist[i][k] = c;
 			}
 		}
@@ -47,7 +76,7 @@ int main(int argc, char* argv[]) {
 	
 	int unknown = wlen;
 	int trycount;
-	int num[26] = {0};
+	int num[37] = {0};
 	char word[wlen + 1];
 	char tries[wlen * 3 / 2 + 5][wlen + 1];
 	for(int i = 0; i < wlen; i++) word[i] = '*';
@@ -55,18 +84,48 @@ int main(int argc, char* argv[]) {
 	printf("please enter your guess, followed by its score, separated by a line break:\n");
 	for (trycount = 0; trycount < wlen * 3 / 2 + 5 && unknown; trycount++) {
 		printf("new try\n");
-		int tmpnum[26] = {0};
+		int tmpnum[37] = {0};
 		char try[wlen + 1];
 		char score[wlen + 1];
 		int i;
-		for (i = 0; i <= wlen && (try[i] = getchar()) != '\n'; i++) if (try[i] > 96 && try[i] < 123) try[i] -= 32;
+		for (i = 0; i <= wlen && (try[i] = getchar()) != '\n'; i++) {
+			if (try[i] > 96 && try[i] < 123) try[i] -= 32;
+			if (try[i] == -61) {
+				char c = getchar();
+				switch (c) {
+					case -127: try[i] = 91; break; // Á
+					case -95: try[i] = 91; break;
+					case -119: try[i] = 92; break; // É
+					case -87: try[i] = 92; break;
+					case -115: try[i] = 93; break; // Í
+					case -83: try[i] = 93; break;
+					case -109: try[i] = 94; break;// Ó
+					case -77: try[i] = 94; break;
+					case -102: try[i] = 95; break;// Ú
+					case -70: try[i] = 95; break;
+					case -124: try[i] = 96; break;// Ä
+					case -92: try[i] = 96; break;
+					case -106: try[i] = 97; break;// Ö
+					case -74: try[i] = 97; break;
+					case -100: try[i] = 98; break;// Ü
+					case -68: try[i] = 98; break;
+					case -97: try[i] = 99; break; // ß
+					default: fprintf(stderr, "Invalid letter!\n");
+				}
+			} else if (try[i] == -59) {
+				char c = getchar();
+				if (c == -112 || c == -111) try[i] = 100;    // Ő
+				else if (c == -80 || c == -79) try[i] = 101; // Ű
+				else fprintf(stderr, "Invalid letter!\n");
+			}
+		}
 		if (i == wlen + 1 && try[wlen] != '\n') {
 			while ((score[0] = getchar()) != '\n');
-			printf("Too long!\n");
+			fprintf(stderr, "Too long!\n");
 			trycount--;
 			continue;
 		} else if (i < wlen) {
-			printf("Too short!\n");
+			fprintf(stderr, "Too short!\n");
 			trycount--;
 			continue;
 		}
@@ -78,7 +137,7 @@ int main(int argc, char* argv[]) {
 			else if (score[i] == '+'
 			      || score[i] == '.') score[i] = '*';
 			else if (score[i] != 'X' && score[i] != '*' && score[i] != '-') {
-				printf("Invalid scoring caracter, use \'X\', \'*\' or \'-\' !\n");
+				fprintf(stderr, "Invalid scoring caracter, use \'X\', \'*\' or \'-\' !\n");
 				i = wlen + 2;
 			}
 		}
@@ -86,10 +145,10 @@ int main(int argc, char* argv[]) {
 		
 		if (i == wlen + 1 && score[wlen] != '\n') {
 			while ((score[0] = getchar()) != '\n');
-			printf("Too long!\n");
+			fprintf(stderr, "Too long!\n");
 			continue;
 		} else if (i < wlen) {
-			printf("Too short!\n");
+			fprintf(stderr, "Too short!\n");
 			continue;
 		}
 		
@@ -107,18 +166,20 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		
-		for (i = 0; i < 26; i++) if (tmpnum[i] > num[i] && num[i] >= 0) num[i] = tmpnum[i];
-		printf("Currently known correct letters: %s\n", word);
+		for (i = 0; i < 37; i++) if (tmpnum[i] > num[i] && num[i] >= 0) num[i] = tmpnum[i];
+		printf("Currently known correct letters: ");
+		printword(word);
+		putchar('\n');
 		unknown = 0;
 		for (i = 0; i < wlen; i++) if (word[i] == '*') unknown++;
 		if (unknown) {
 			printf("Possible Solutions:");
 			int psc = 300;
 			int numpossibles = 0;
-			int possiblehist[26] = {0};
+			int possiblehist[37] = {0};
 			int possibles[psc];
 			for (i = 0; i < wlistlen; i++) {
-				int dictnum[26] = {0};
+				int dictnum[37] = {0};
 				int j;
 				for (j = 0; j < wlen; j++) {
 					char c = wordlist[i][j];
@@ -132,11 +193,12 @@ int main(int argc, char* argv[]) {
 				}
 				if (j == wlen) {
 					int found0 = 1;
-					for (int k = 0; k < 26; k++) if (dictnum[k] < num[k]) found0 = 0;
+					for (int k = 0; k < 37; k++) if (dictnum[k] < num[k]) found0 = 0;
 					if (found0) {
 						if (numpossibles < 30) {
 							if (numpossibles % 6 == 0) putchar('\n');
-							printf("%s\t", wordlist[i]);
+							printword(wordlist[i]);
+							putchar('\t');
 						}
 						possibles[numpossibles] = i;
 						numpossibles++;
@@ -150,7 +212,7 @@ int main(int argc, char* argv[]) {
 				char nextsuggest[wlen + 1];
 				putchar('\n');
 				for (int i = 0, j = 0; i < wlistlen; i++) {
-					int locnum[26] = {0};
+					int locnum[37] = {0};
 					int score = 0;
 					int forbidknown = (i != possibles[j]);
 					
@@ -171,21 +233,52 @@ int main(int argc, char* argv[]) {
 						for (int k = 0; k < wlen; k++) nextsuggest[k] = wordlist[i][k];
 						nextsuggest[wlen] = '\0';
 						maxscore = score;
-						for (int k = 0; k < 26; k++) printf("%d ", locnum[k]);
-						printf("%s\n", wordlist[i]);
+						for (int k = 0; k < 37; k++) printf("%d ", locnum[k]);
+						printword(wordlist[i]);
+						putchar('\n');
 					}
 				}
-				printf("\nSuggestion for letter discovery: %s\n", nextsuggest);
+				printf("\nSuggestion for letter discovery: ");
+				printword(nextsuggest);
+				putchar('\n');
 			}
-			//for (int k = 0; k < 26; k++) printf("%d ", possiblehist[k]);
+			//for (int k = 0; k < 37; k++) printf("%d ", possiblehist[k]);
 			putchar('\n');
 			if (numpossibles == 0) {
 				printf("\nNo compatible words found!\nPlease enter solution for addition to word list!\n");
 				for (int i = 0; i < wlen; i++) {
 					word[i] = getchar();
 					if (word[i] > 96 && word[i] < 123) word[i] -= 32;
+					if (try[i] == -61) {
+						char c = getchar();
+						switch (c) {
+							case -127: try[i] = 91; break; // Á
+							case -95: try[i] = 91; break;
+							case -119: try[i] = 92; break; // É
+							case -87: try[i] = 92; break;
+							case -115: try[i] = 93; break; // Í
+							case -83: try[i] = 93; break;
+							case -109: try[i] = 94; break;// Ó
+							case -77: try[i] = 94; break;
+							case -102: try[i] = 95; break;// Ú
+							case -70: try[i] = 95; break;
+							case -124: try[i] = 96; break;// Ä
+							case -92: try[i] = 96; break;
+							case -106: try[i] = 97; break;// Ö
+							case -74: try[i] = 97; break;
+							case -100: try[i] = 98; break;// Ü
+							case -68: try[i] = 98; break;
+							case -97: try[i] = 99; break; // ß
+							default: fprintf(stderr, "Invalid letter!\n");
+						}
+					} else if (try[i] == -59) {
+						char c = getchar();
+						if (c == -112 || c == -111) try[i] = 100;    // Ő
+						else if (c == -80 || c == -79) try[i] = 101; // Ű
+						else fprintf(stderr, "Invalid letter!\n");
+					}
 				}
-				printf("%s\n", word);
+				printword(word);
 				//putchar('\n');
 				trycount = -1;
 				break;
@@ -226,7 +319,7 @@ int main(int argc, char* argv[]) {
 					}
 					putchar('\n');
 				}
-			} else printf("Cannot evaluate try count histogram (missing file)!\n");
+			} else fprintf(stderr, "Cannot evaluate try count histogram (missing file)!\n");
 		}
 	}
 	
