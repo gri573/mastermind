@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 int printword(char word[]) {
 	for (int i = 0; 1; i++) {
 		if (word[i] == 0) return 0;
@@ -22,6 +23,13 @@ int printword(char word[]) {
 		}
 	}
 }
+
+typedef struct wordlist_entry {
+	int score;
+	int id;
+	struct wordlist_entry* next;
+	struct wordlist_entry* prev;
+} wentry;
 
 int main(int argc, char* argv[]) {
 	// read word list
@@ -48,7 +56,7 @@ int main(int argc, char* argv[]) {
 	}
 	char wordlist[wlistlen][wlen + 1];
 	FILE* wfile;
-	if (argc <= 2) wfile = fopen("wordlist-english0.txt", "r");
+	if (argc <= 2) wfile = fopen("en_1.txt", "r");
 	else wfile = fopen(argv[2], "r");
 	if (wfile == NULL) {
 		fprintf(stderr, "Wordlist file missing!\n");
@@ -133,9 +141,9 @@ int main(int argc, char* argv[]) {
 		tries[trycount][wlen] = '\0';
 		for (i = 0; i <= wlen && (score[i] = getchar()) != '\n'; i++) {
 			if (score[i] == 'x') score[i] = 'X';
-			else if (score[i] == '_') score[i] = '-';
-			else if (score[i] == '+'
-			      || score[i] == '.') score[i] = '*';
+			else if (score[i] == '_'
+			      || score[i] == '.') score[i] = '-';
+			else if (score[i] == '+') score[i] = '*';
 			else if (score[i] != 'X' && score[i] != '*' && score[i] != '-') {
 				fprintf(stderr, "Invalid scoring caracter, use \'X\', \'*\' or \'-\' !\n");
 				i = wlen + 2;
@@ -158,26 +166,34 @@ int main(int argc, char* argv[]) {
 				word[i] = try[i];
 			} else if (score[i] == '*') {
 				int k = 0;
-				for (; k < wlen; k++) if (word[k] == try[i] && word[k] != try[k]) break;
-				if (k == wlen) tmpnum[try[i] - 65]++;
+				for (; k < wlen; k++) if (word[k] == try[i] && word[k] != try[k]) {
+					k = -5;
+					break;
+				}
+				if (k >= 0) {
+					tmpnum[try[i] - 65]++;
+				}
 			} else if (tmpnum[try[i] - 65] == 0){
 				num[try[i] - 65]--;
 				tmpnum[try[i] - 65]--;
 			}
 		}
-		
+
+
 		for (i = 0; i < 37; i++) if (tmpnum[i] > num[i] && num[i] >= 0) num[i] = tmpnum[i];
-		printf("Currently known correct letters: ");
-		printword(word);
-		putchar('\n');
+
 		unknown = 0;
 		for (i = 0; i < wlen; i++) if (word[i] == '*') unknown++;
+		if (!unknown) for (i = 0; i < wlen; i++) if (word[i] != try[i]) unknown = 1;
 		if (unknown) {
 			printf("Possible Solutions:");
-			int psc = 300;
+			int psc = 600;
 			int numpossibles = 0;
 			int possiblehist[37] = {0};
 			int possibles[psc];
+			char word0[wlen + 1];
+			for (i = 0; i <= wlen; i++) word0[i] = 0;
+
 			for (i = 0; i < wlistlen; i++) {
 				int dictnum[37] = {0};
 				int j;
@@ -200,17 +216,35 @@ int main(int argc, char* argv[]) {
 							printword(wordlist[i]);
 							putchar('\t');
 						}
+						for (j = 0; j < wlen; j++) {
+							if (word0[j] == 0) word0[j] = wordlist[i][j];
+							else if (word0[j] != wordlist[i][j]) word0[j] = '*';
+						}
 						possibles[numpossibles] = i;
 						numpossibles++;
-						for (j = 0; j < wlen; j++) if (word[j] == '*') possiblehist[wordlist[i][j] - 65]++;
+						//for (j = 0; j < wlen; j++) if (word[j] == '*') possiblehist[wordlist[i][j] - 65]++;
 						if (numpossibles >= psc) break;
 					}
 				}
 			}
+			if (numpossibles > 1) for (i = 0; i < wlen; i++) {
+				if (word[i] == '*' && word0[i] != '*') {
+					if (num[word0[i] - 65] > 0) num[word0[i] - 65]--;
+					word[i] = word0[i];
+				}
+			}
+			printf("\nCurrently known correct letters: ");
+			printword(word0);
 			if (numpossibles > 2 ) {
-				int maxscore = 0;
-				char nextsuggest[wlen + 1];
+				for (int i = 0; i < numpossibles; i++) {
+					for (int j = 0; j < wlen; j++) if (word[j] == '*') possiblehist[wordlist[possibles[i]][j] - 65]++;
+				}
+				int unknownc = 0;
+				for (int i = 0; i < wlen; i++) if (word[i] == '*') unknownc++;
 				putchar('\n');
+				int suggestcount = 30;
+				void* bestlistentrypoint = calloc(suggestcount, sizeof(wentry));
+				wentry* bestlist = (wentry*) bestlistentrypoint;
 				for (int i = 0, j = 0; i < wlistlen; i++) {
 					int locnum[37] = {0};
 					int score = 0;
@@ -222,24 +256,49 @@ int main(int argc, char* argv[]) {
 						for (int l = 0; l <= trycount; l++) if (tries[l][k] == wordlist[i][k]) nothere = 1;
 						if (num[wordlist[i][k] - 65] > 0) nothere *= 5;
 						int isknown = (wordlist[i][k] == word[k]);
-						score += possiblehist[wordlist[i][k] - 65] * (1 + (word[k] == '*')) / (3 * locnum[wordlist[i][k] - 65] + 1) * (1 - forbidknown * isknown) / (1 + (!isknown) * nothere);
+						score += possiblehist[wordlist[i][k] - 65] * (1 + (word[k] == '*')) / (3 * locnum[wordlist[i][k] - 65] + 1) * (1 - forbidknown * 0 - isknown) / (1 + (!isknown) * nothere);
 						if (!isknown) locnum[wordlist[i][k] - 65]++;
 					}
 					if (!forbidknown) {
-						score = score * 3 / 2;
+						score = (int) (score * (1.0 + 2.0 * unknownc / numpossibles));
 						j++;
 					}
-					if (score > maxscore) {
-						for (int k = 0; k < wlen; k++) nextsuggest[k] = wordlist[i][k];
-						nextsuggest[wlen] = '\0';
-						maxscore = score;
-						for (int k = 0; k < 37; k++) printf("%d ", locnum[k]);
-						printword(wordlist[i]);
-						putchar('\n');
+					wentry* currententry = bestlist;
+					for (int l = 0; l < suggestcount; l++) {
+						if (currententry->score < score) {
+							wentry* lastentry = currententry;
+							wentry* newentry;
+							l++;
+							for (; lastentry->next != NULL && l < suggestcount; l++) {
+								lastentry = lastentry->next;
+							}
+							if (l < suggestcount) {
+								newentry = ((wentry*) bestlistentrypoint) + l;
+							} else {
+								newentry = lastentry;
+							}
+							if (newentry != currententry) newentry->next = currententry;
+							newentry->id = i;
+							newentry->score = score;
+							newentry->prev = currententry->prev;
+							if (newentry->prev != NULL) newentry->prev->next = newentry;
+							else bestlist = newentry;
+							currententry->prev = newentry;
+							break;
+						}
+						if (currententry->next != NULL) currententry = currententry->next;
 					}
 				}
-				printf("\nSuggestion for letter discovery: ");
-				printword(nextsuggest);
+				printf("\n\nSuggestions for letter discovery (best first):\n");
+				wentry* currententry = bestlist;
+				for (int i = 0; i < suggestcount && currententry != NULL; i++) {
+					if (i) printf(", ");
+					if (i != 0 && i % 6 == 0) putchar('\n');
+					printword(wordlist[currententry->id]);
+					currententry = currententry->next;
+				}
+				free(bestlistentrypoint);
+				//printword(nextsuggest);
 				putchar('\n');
 			}
 			//for (int k = 0; k < 37; k++) printf("%d ", possiblehist[k]);
@@ -279,7 +338,7 @@ int main(int argc, char* argv[]) {
 					}
 				}
 				printword(word);
-				//putchar('\n');
+				putchar('\n');
 				trycount = -1;
 				break;
 			}
@@ -294,7 +353,8 @@ int main(int argc, char* argv[]) {
 	if (trycount > 0) {
 		if (unknown) printf("Out of tries!\n");
 		else {
-			printf("Found in %d tries!\n", trycount);
+			printword(word);
+			printf(" found in %d tries!\n", trycount);
 			int tryhist[10] = {0};
 			int ftrycount = 0;
 			FILE* histfile = fopen("tryhist.txt", "r");
@@ -310,15 +370,23 @@ int main(int argc, char* argv[]) {
 					fprintf(histfile, "%d ", tryhist[i]);
 				}
 				fclose(histfile);
-				for (int i = ftrycount; i > 0; i--) {
-					for (int j = 0; j < 10; j++) {
-						switch (i > tryhist[j]) {
-							case 1: putchar(' '); break;
-							case 0: putchar('#'); break;
-						}
-					}
-					putchar('\n');
+				printf("Show histogram? (y/N)");
+				char c;
+				while ((c = getchar()) != 'y' && c != 'Y' && c != 'n' && c != 'N' && c != '\n') {
+					printf("\nplease enter \"Y\" or \"N\" and confirm with ENTER\n");
+					getchar();
 				}
+				if (c == 'y' || c == 'Y') {
+					for (int i = ftrycount; i > 0; i -= ftrycount / 10 + 1) {
+						for (int j = 0; j < 10; j++) {
+							switch (i > tryhist[j]) {
+								case 1: putchar(' '); break;
+								case 0: putchar('#'); break;
+							}
+						}
+						putchar('\n');
+					}
+				} else if (c == 'n' || c == 'N') getchar();
 			} else fprintf(stderr, "Cannot evaluate try count histogram (missing file)!\n");
 		}
 	}
