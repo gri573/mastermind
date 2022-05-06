@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-int printword(char word[]) {
+int printword(signed char word[]) {
 	for (int i = 0; 1; i++) {
 		if (word[i] == 0) return 0;
 		if (word[i] == '*' || (word[i] > 64 && word[i] < 91)) putchar(word[i]);
@@ -31,13 +31,13 @@ typedef struct wordlist_entry {
 	struct wordlist_entry* prev;
 } wentry;
 
-int main(int argc, char* argv[]) {
+int main(int argc, const char* argv[]) {
 	// read word list
 	int wlistlen = 14000;
 	int wlen = -1;
 	if (argc >= 2) {
 		wlen = 0;
-		char c;
+		signed char c;
 		int i = 0;
 		while ((c = *(argv[1] + i)) != '\0') {
 			if (c > 47 && c < 58) wlen = 10 * wlen + c - 48;
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
 		getchar();
 		putchar('\n');
 	}
-	char wordlist[wlistlen][wlen + 1];
+	signed char wordlist[wlistlen][wlen + 1];
 	FILE* wfile;
 	if (argc <= 2) wfile = fopen("en_1.txt", "r");
 	else wfile = fopen(argv[2], "r");
@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 	for (int i = 0; i < wlistlen; i++) {
-		char c; 
+		signed char c; 
 		int k;
 		for (k = 0; (c = fgetc(wfile)) != '\n'; k++) {
 			if (c == EOF) {
@@ -85,21 +85,21 @@ int main(int argc, char* argv[]) {
 	int unknown = wlen;
 	int trycount;
 	int num[37] = {0};
-	char word[wlen + 1];
-	char tries[wlen * 3 / 2 + 5][wlen + 1];
+	signed char word[wlen + 1];
+	signed char tries[wlen * 3 / 2 + 5][wlen + 1];
 	for(int i = 0; i < wlen; i++) word[i] = '*';
 	word[wlen] = '\0';
 	printf("please enter your guess, followed by its score, separated by a line break:\n");
 	for (trycount = 0; trycount < wlen * 3 / 2 + 5 && unknown; trycount++) {
 		printf("new try\n");
 		int tmpnum[37] = {0};
-		char try[wlen + 1];
-		char score[wlen + 1];
+		signed char try[wlen + 1];
+		signed char score[wlen + 1];
 		int i;
 		for (i = 0; i <= wlen && (try[i] = getchar()) != '\n'; i++) {
 			if (try[i] > 96 && try[i] < 123) try[i] -= 32;
 			if (try[i] == -61) {
-				char c = getchar();
+				signed char c = getchar();
 				switch (c) {
 					case -127: try[i] = 91; break; // Á
 					case -95: try[i] = 91; break;
@@ -121,7 +121,7 @@ int main(int argc, char* argv[]) {
 					default: fprintf(stderr, "Invalid letter!\n");
 				}
 			} else if (try[i] == -59) {
-				char c = getchar();
+				signed char c = getchar();
 				if (c == -112 || c == -111) try[i] = 100;    // Ő
 				else if (c == -80 || c == -79) try[i] = 101; // Ű
 				else fprintf(stderr, "Invalid letter!\n");
@@ -191,14 +191,14 @@ int main(int argc, char* argv[]) {
 			int numpossibles = 0;
 			int possiblehist[37] = {0};
 			int possibles[psc];
-			char word0[wlen + 1];
+			signed char word0[wlen + 1];
 			for (i = 0; i <= wlen; i++) word0[i] = 0;
 
 			for (i = 0; i < wlistlen; i++) {
 				int dictnum[37] = {0};
 				int j;
 				for (j = 0; j < wlen; j++) {
-					char c = wordlist[i][j];
+					signed char c = wordlist[i][j];
 					if (word[j] == '*') {
 						if (num[c - 65] < 0) break;
 						int allowed = 1;
@@ -309,7 +309,7 @@ int main(int argc, char* argv[]) {
 					word[i] = getchar();
 					if (word[i] > 96 && word[i] < 123) word[i] -= 32;
 					if (try[i] == -61) {
-						char c = getchar();
+						signed char c = getchar();
 						switch (c) {
 							case -127: try[i] = 91; break; // Á
 							case -95: try[i] = 91; break;
@@ -331,7 +331,7 @@ int main(int argc, char* argv[]) {
 							default: fprintf(stderr, "Invalid letter!\n");
 						}
 					} else if (try[i] == -59) {
-						char c = getchar();
+						signed char c = getchar();
 						if (c == -112 || c == -111) try[i] = 100;    // Ő
 						else if (c == -80 || c == -79) try[i] = 101; // Ű
 						else fprintf(stderr, "Invalid letter!\n");
@@ -371,7 +371,7 @@ int main(int argc, char* argv[]) {
 				}
 				fclose(histfile);
 				printf("Show histogram? (y/N)");
-				char c;
+				signed char c;
 				while ((c = getchar()) != 'y' && c != 'Y' && c != 'n' && c != 'N' && c != '\n') {
 					printf("\nplease enter \"Y\" or \"N\" and confirm with ENTER\n");
 					getchar();
