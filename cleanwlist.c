@@ -47,6 +47,7 @@ int main(int argc, char* argv[]) {
 			}
 			if (c == '\n') {
 				*(wlist + maxwlen * i + j) = '\0';
+				if (j == 0) i--;
 				break;
 			}
 			if (c > 96 && c < 123) c -= 32;
@@ -63,6 +64,7 @@ int main(int argc, char* argv[]) {
 					//break;
 					fclose(instream);
 					fclose(outstream);
+					free((void*) wlist);
 					return 0;
 				}
 				break;
@@ -70,39 +72,7 @@ int main(int argc, char* argv[]) {
 			*(wlist + maxwlen * i + j) = c;
 			j++;
 		}
-/*		if (j >= 0) {
-			int lettercount = 0;
-			int singleletters = 0;
-			for (int l = 0; l < 256; l++) {
-				if (chars[l]) {
-					if (chars[l] == 1) singleletters++;
-					lettercount++;
-				}
-			}
-			if (j > 3 && lettercount < 3) j = -1;
-			if (singleletters * 2 < j) j = -1;
-		}
-		if (j >= 0) {
-			int new = 1;
-			for (int l = 0; l < i; l++) {
-				int same = 1;
-				for (int k = 0; k < maxwlen; k++) {
-					if (*(wlist + maxwlen * i + k) != *(wlist + maxwlen * l + k)) {
-						same = 0;
-						break;
-					}
-					if (*(wlist + maxwlen * i + k) == '\0') {
-						break;
-					}
-				}
-				if (same) new = 0;
-			}
-			if (!new) {
-				j = -1;
-				fprintf(stderr, ".");
-			}
-		}*/
-		if (j >= 0) {
+		if (j > 0) {
 			if (!((i / 1024 * i / 1024) % 10 || i % 1024)) fprintf(stderr, "%d\n", i);
 			fprintf(outstream, "%s\n", wlist + maxwlen * i);
 		} else {

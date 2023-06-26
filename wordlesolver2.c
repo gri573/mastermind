@@ -31,9 +31,10 @@ typedef struct wordlist_entry {
 	struct wordlist_entry* prev;
 } wentry;
 
+#define MAXWLISTLEN 19000
 int main(int argc, const char* argv[]) {
 	// read word list
-	int wlistlen = 14000;
+	int wlistlen = MAXWLISTLEN;
 	int wlen = -1;
 	if (argc >= 2) {
 		wlen = 0;
@@ -56,8 +57,9 @@ int main(int argc, const char* argv[]) {
 	}
 	signed char wordlist[wlistlen][wlen + 1];
 	FILE* wfile;
-	if (argc <= 2) wfile = fopen("en_1.txt", "r");
-	else wfile = fopen(argv[2], "r");
+	char wfilename[64] = "en_1.txt";
+	if (argc > 2) for (int i = 0; argv[2][i] != 0; i++) wfilename[i] = argv[2][i];
+	wfile = fopen(wfilename, "r");
 	if (wfile == NULL) {
 		fprintf(stderr, "Wordlist file missing!\n");
 		return -1;
@@ -79,7 +81,7 @@ int main(int argc, const char* argv[]) {
 		else wordlist[i][wlen] = '\0';
 	}
 	fclose(wfile);
-	if (wlistlen != 14000) wlistlen += 2;
+	if (wlistlen != MAXWLISTLEN) wlistlen += 2;
 	printf("Number of available words: %d\n", wlistlen);
 	
 	int unknown = wlen;
@@ -95,6 +97,7 @@ int main(int argc, const char* argv[]) {
 		int tmpnum[37] = {0};
 		signed char try[wlen + 1];
 		signed char score[wlen + 1];
+		char valid = 1;
 		int i;
 		for (i = 0; i <= wlen && (try[i] = getchar()) != '\n'; i++) {
 			if (try[i] > 96 && try[i] < 123) try[i] -= 32;
@@ -126,7 +129,14 @@ int main(int argc, const char* argv[]) {
 				else if (c == -80 || c == -79) try[i] = 101; // Ű
 				else fprintf(stderr, "Invalid letter!\n");
 			}
+			if (try[i] < 65 || try[i] > 99) {
+				printf("Invalid Character! please only use A-Z, Á, É, Í, Ó, Ú, Ö, Ő, Ü, Ű (or their lowercase variants)\n");
+				valid = 0;
+				break;
+			}
 		}
+		if (!valid)
+			continue;
 		if (i == wlen + 1 && try[wlen] != '\n') {
 			while ((score[0] = getchar()) != '\n');
 			fprintf(stderr, "Too long!\n");
@@ -227,14 +237,16 @@ int main(int argc, const char* argv[]) {
 					}
 				}
 			}
-			if (numpossibles > 1) for (i = 0; i < wlen; i++) {
+			
+			for (i = 0; i < wlen; i++) {
 				if (word[i] == '*' && word0[i] != '*') {
 					if (num[word0[i] - 65] > 0) num[word0[i] - 65]--;
 					word[i] = word0[i];
 				}
 			}
+			
 			printf("\nCurrently known correct letters: ");
-			printword(word0);
+			printword(word);
 			if (numpossibles > 2 ) {
 				for (int i = 0; i < numpossibles; i++) {
 					for (int j = 0; j < wlen; j++) if (word[j] == '*') possiblehist[wordlist[possibles[i]][j] - 65]++;
@@ -259,7 +271,7 @@ int main(int argc, const char* argv[]) {
 						score += possiblehist[wordlist[i][k] - 65] * (1 + (word[k] == '*')) / (3 * locnum[wordlist[i][k] - 65] + 1) * (1 - forbidknown * 0 - isknown) / (1 + (!isknown) * nothere);
 						if (!isknown) locnum[wordlist[i][k] - 65]++;
 					}
-					if (!forbidknown) {
+					if (j < numpossibles && !forbidknown) {
 						score = (int) (score * (1.0 + 2.0 * unknownc / numpossibles));
 						j++;
 					}
@@ -406,7 +418,7 @@ int main(int argc, const char* argv[]) {
 		}
 	}
 	if (isnewword) {
-		wfile = fopen("wordlist-english0.txt", "a");
+		wfile = fopen(wfilename, "a");
 		fprintf(wfile, "%s\n", word);
 		printf("Added %s to wordlist!\n", word);
 		fclose(wfile);
