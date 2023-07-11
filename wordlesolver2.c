@@ -57,7 +57,7 @@ int main(int argc, const char* argv[]) {
 	}
 	signed char wordlist[wlistlen][wlen + 1];
 	FILE* wfile;
-	char wfilename[64] = "en_1.txt";
+	char wfilename[64] = "wordlist_english_scowl.txt";
 	if (argc > 2) for (int i = 0; argv[2][i] != 0; i++) wfilename[i] = argv[2][i];
 	wfile = fopen(wfilename, "r");
 	if (wfile == NULL) {
